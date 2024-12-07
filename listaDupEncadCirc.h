@@ -20,21 +20,17 @@ typedef struct nomes{
 
 //Operações com a Lista
 Lista* criaLista();
-void liberaLista(Lista* lilic);
-int listaVazia(Lista* lilic);
-int listaCheia(Lista* lilic);
-int tamanhoLista(Lista* lilic);
-int insereIniLista(Lista* lilic,void* dado,char tipo);
-//int insereMeioLista(Lista* lilic,void* dado,char tipo);
-//int insereFinaLista(Lista* lilic,void* dado,char tipo);
-int removeIniLista(Lista* lilic);
-//int removeMeiLista(Lista* lilic);
-//int removeFinaLista(Lista* lilic);
-void imprimeLista(Lista* lilic);
-int buscaElemento(Lista* lilic,int pos);
+void liberaLista(Lista* licir);
+int listaVazia(Lista* licir);
+int listaCheia(Lista* licir);
+int tamanhoLista(Lista* licir);
+int insereIniLista(Lista* licir,void* dado,char tipo);
+int removeIniLista(Lista* licir);
+void imprimeLista(Lista* licir);
 
+//operações de ordenação
+int selectionSortCrescenteNum(Lista* licir,int tam);
+int selectionSortDecrescenteNum(Lista* licir);
 
-//Operações auxiliares
-//void iniciaListaVazia(Elem *vazio);
 
 

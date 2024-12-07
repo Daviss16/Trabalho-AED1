@@ -10,42 +10,42 @@ struct elemento{
 typedef struct elemento Elem;
 
 Lista *criaLista(){
-    Lista* lilic = (Lista*)malloc(sizeof(Lista));
-    if(lilic == NULL){ 
+    Lista* licir = (Lista*)malloc(sizeof(Lista));
+    if(licir == NULL){ 
         printf("Erro ao criar Lista,encerrando programa.\n");
         exit(1);
     }
-    *lilic = NULL;
-    return lilic;
+    *licir = NULL;
+    return licir;
 }
 
-void liberaLista(Lista *lilic){
-    if(lilic != NULL && (*lilic) != NULL){
-        Elem *aux,*no = *lilic;
-        while((*lilic) != no->prox){
+void liberaLista(Lista *licir){
+    if(licir != NULL && (*licir) != NULL){
+        Elem *aux,*no = *licir;
+        while((*licir) != no->prox){
             aux = no;
             no = no->prox;
             free(aux);
         }
         free(no);
-        free(lilic);
+        free(licir);
     }
 }
 
-int listaVazia(Lista *lilic){
-    if(lilic == NULL){
+int listaVazia(Lista *licir){
+    if(licir == NULL){
         printf("A Lista não existe.\n");
         return 1;
     }
-    if((*lilic) == NULL){
+    if((*licir) == NULL){
         printf("A Lista esta vazia.\n");
         return 1;
     }
     return 0;
 }
 
-int listaCheia(Lista *lilic){
-    if(lilic == NULL){
+int listaCheia(Lista *licir){
+    if(licir == NULL){
         printf("A Lista não existe.\n");
         return 0;
     }
@@ -58,19 +58,19 @@ int listaCheia(Lista *lilic){
     return 0;
 }
 
-int tamanhoLista(Lista *lilic){
-    if(lilic == NULL || (*lilic) == NULL) return 0;
-    Elem *no = *lilic;
+int tamanhoLista(Lista *licir){
+    if(licir == NULL || (*licir) == NULL) return 0;
+    Elem *no = *licir;
     int count = 0;
     do{
         count ++;
         no = no->prox;
-    }while(no != (*lilic)); 
+    }while(no != (*licir)); 
     return count;
 }
 
-int insereIniLista(Lista *lilic, void *dado, char tipo){
-    if(lilic == NULL){
+int insereIniLista(Lista *licir, void *dado, char tipo){
+    if(licir == NULL){
         printf("A Lista não existe.\n");
         return 0;
     }
@@ -97,79 +97,134 @@ int insereIniLista(Lista *lilic, void *dado, char tipo){
         free(no);
         return 0;
     }
-    if((*lilic)==NULL){
-        *lilic = no;
+    if((*licir)==NULL){
+        *licir = no;
         no->prox = no;
         no->ant = no;
     }
     else{
-        Elem *aux = *lilic;
-        while(aux->prox != (*lilic)){
+        Elem *aux = *licir;
+        while(aux->prox != (*licir)){
             aux = aux->prox;
         }
         aux->prox->ant = no;
         no->ant = aux->prox;
         aux->prox = no;
-        no->prox = (*lilic);
-        *lilic = no;
+        no->prox = (*licir);
+        *licir = no;
     }
     return 1;
 }
 
-int removeIniLista(Lista *lilic){
-    if(lilic == NULL){
+int removeIniLista(Lista *licir){
+    if(licir == NULL){
         printf("A Lista não existe.\n");
         return 0;
     }
-    if((*lilic) == NULL){
+    if((*licir) == NULL){
         printf("A Lista esta vazia.\n");
         return 0;
     }
 
-    if((*lilic) == (*lilic)->prox){
-        free(*lilic);
-        *lilic = NULL;
+    if((*licir) == (*licir)->prox){
+        free(*licir);
+        *licir = NULL;
         return 1;
     }
-    Elem *atual = *lilic;
-    while(atual->prox != (*lilic)){
+    Elem *atual = *licir;
+    while(atual->prox != (*licir)){
         atual = atual->prox;
     }
-    Elem *no = *lilic;
+    Elem *no = *licir;
     atual->prox = no->prox;
     no->prox->ant = atual;
-    *lilic = no->prox;
+    *licir = no->prox;
     free(no);
     return 1;
 }
 
-void imprimeLista(Lista *lilic){
-    if(lilic == NULL){
+void imprimeLista(Lista *licir){
+    if(licir == NULL){
         printf("A Lista não existe.\n");
         return ;
     }
-    if((*lilic) == NULL){
+    if((*licir) == NULL){
         printf("A Lista esta vazia.\n");
         return ;
     }
 
-    printf("A lista possui %d nos.\n\n",tamanhoLista(lilic));
-    Elem *no = *lilic;
-    int ind = 1;
-    while(no->prox != (*lilic)){
-        printf("no numero %d:\n",ind);
+    printf("A lista possui %d nos.\n\n",tamanhoLista(licir));
+    Elem *no = *licir;
+    //int ind = 1;
+    do{
+        //printf("no numero %d:\n",ind);
         if(no->dadoNum.num != 0)
             printf("Valor %d\n",no->dadoNum.num);
         if(strlen(no->dadoNome.nome) != 0)
             printf("Nome: %s\n",no->dadoNome.nome);
-        ind++;
+        //ind++;
         no = no->prox;
-    }
+    }while(no != (*licir));
 }
 
-int buscaElemento(Lista *lilic, int pos){
-    
-    return 0;
+int selectionSortCrescenteNum(Lista *licir, int tam){
+    if(licir == NULL){
+        printf("A Lista não existe.\n");
+        return 0;
+    }
+    if((*licir) == NULL){
+        printf("A Lista esta vazia.\n");
+        return 0;
+    }
+
+    Elem *aux = (*licir),*aux2,*menorNo;
+    for(int i = 0; i < (tam - 1);i++){
+        aux2 = aux->prox;
+        menorNo = aux;
+        while(aux2 != (*licir)){
+            if(aux2->dadoNum.num < menorNo->dadoNum.num){
+                menorNo = aux2;
+            }
+            aux2 = aux2->prox;
+        }
+        if(aux != menorNo){
+            Numeros temporario = aux->dadoNum;
+            aux->dadoNum = menorNo->dadoNum;
+            menorNo->dadoNum = temporario;
+        }
+        aux = aux->prox;
+    }
+    return 1;
+}
+
+int selectionSortDecrescenteNum(Lista *licir){
+    if(licir == NULL){
+        printf("A Lista não existe.\n");
+        return 0;
+    }
+    if((*licir) == NULL){
+        printf("A Lista esta vazia.\n");
+        return 0;
+    }
+
+    Elem *aux = (*licir),*aux2,*maiorNo;
+    do{
+        aux2 = aux->prox;
+        maiorNo = aux;
+        while(aux2 != (*licir)){
+            if(aux2->dadoNum.num > maiorNo->dadoNum.num){
+                maiorNo = aux2;
+            }
+            aux2 = aux2->prox;
+        }
+        if(maiorNo != aux){
+            Numeros temporario = aux->dadoNum;
+            aux->dadoNum = maiorNo->dadoNum;
+            maiorNo->dadoNum = temporario;
+        }
+        aux = aux->prox;
+    }while(aux->prox != (*licir));
+    return 1;
 }
 
 /*void iniciaListaVazia(Elem *vazio){
