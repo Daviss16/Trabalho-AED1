@@ -212,17 +212,18 @@ int selectionSortDecrescenteNum(Lista *licir){
         aux2 = aux->prox;
         maiorNo = aux;
         while(aux2 != (*licir)){
-            if(aux2->dadoNum.num > maiorNo->dadoNum.num){
+            if((aux2->dadoNum.num > maiorNo->dadoNum.num)&&(strlen(aux2->dadoNome.nome) != 0)){
                 maiorNo = aux2;
             }
             aux2 = aux2->prox;
         }
-        if(maiorNo != aux){
+        if(maiorNo->dadoNum.num != aux->dadoNum.num){
             Numeros temporario = aux->dadoNum;
             aux->dadoNum = maiorNo->dadoNum;
             maiorNo->dadoNum = temporario;
         }
         aux = aux->prox;
+        
     }while(aux->prox != (*licir));
     return 1;
 }
@@ -236,4 +237,9 @@ int selectionSortDecrescenteNum(Lista *licir){
     strcpy(vazio->dadoNome.nome, "\0");
     vazio->dadoNum.id = 0;
     vazio->dadoNum.num = 0;
+
+    isso é de outra função
+    if(strlen(aux->dadoNome.nome) != 0){
+            aux = aux->prox;
+        }
 }*/
