@@ -209,10 +209,18 @@ int selectionSortDecrescenteNum(Lista *licir){
 
     Elem *aux = (*licir),*aux2,*maiorNo;
     do{
+        while(1){
+            if(strlen(aux->dadoNome.nome) != 0){
+                aux = aux->prox;
+            }
+            else{
+                break;
+            }
+        }
         aux2 = aux->prox;
         maiorNo = aux;
         while(aux2 != (*licir)){
-            if((aux2->dadoNum.num > maiorNo->dadoNum.num)&&(strlen(aux2->dadoNome.nome) != 0)){
+            if((aux2->dadoNum.num > maiorNo->dadoNum.num)){
                 maiorNo = aux2;
             }
             aux2 = aux2->prox;
@@ -242,4 +250,6 @@ int selectionSortDecrescenteNum(Lista *licir){
     if(strlen(aux->dadoNome.nome) != 0){
             aux = aux->prox;
         }
+
+    &&(strlen(aux2->dadoNome.nome) != 0)
 }*/
